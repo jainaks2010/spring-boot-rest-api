@@ -1,0 +1,6 @@
+{
+ "name": "Test User3",
+ "gender": "MALE",
+ "email": "example.mail3@domain.example",
+ "status": "active"
+}
