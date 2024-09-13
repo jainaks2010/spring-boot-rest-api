@@ -1,46 +1,25 @@
 pipeline {
-    agent any
-
+    agent any 
+    parameters { 
+        string description: 'This is the target name for deployment', name: 'name'
+        string description: 'This is the target age for deployment', name: 'age'
+    } 
     stages {
-        stage('Header_1') {
+        stage("print parameter value") {
             steps {
-                echo '1'
-                params.each { param ->  println "${param.key} -> ${param.value} "
-                } 
-            }
-        }
-        stage('Header_2') {
-            steps {
-                echo '2'
-            }
-        }
-        
-        stage('Parallel') { // add this
-            parallel {
-                stage('First Parallel Stage') {
-                    environment {
-                        TEST = 3
+                script {
+                    if (name == '' || name == null) {
+                        echo "The name parameter is again empty"
                     }
-                    
-                    steps {
-                        echo "$TEST"
-                        //echo "name=${name} age=${age}"
+                    else {
+                        echo "we'll deploy on the $name name"
                     }
-                }
-                
-                stage('Execute this together') { // add this
-                    stages {
-                        stage('Another_One') {
-                            steps {
-                                echo "4"
-                            }
-                        }
-                        
-                        stage('Yet Another_One') {
-                            steps {
-                                echo "5"
-                            }
-                        }
+
+                    if (age == '' || age == null) {
+                        echo "The age parameter is again empty"
+                    }
+                    else {
+                        echo "we'll deploy on the $age age"
                     }
                 }
             }
