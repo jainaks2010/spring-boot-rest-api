@@ -22,6 +22,7 @@ pipeline {
                     
                     steps {
                         echo "$TEST"
+                        echo "name=${name} age=${age}"
                     }
                 }
                 
