@@ -5,6 +5,8 @@ pipeline {
         stage('Header_1') {
             steps {
                 echo '1'
+                params.each { param ->  println "${param.key} -> ${param.value} "
+                } 
             }
         }
         stage('Header_2') {
@@ -22,7 +24,7 @@ pipeline {
                     
                     steps {
                         echo "$TEST"
-                        echo "name=${name} age=${age}"
+                        ##echo "name=${name} age=${age}"
                     }
                 }
                 
