@@ -1,13 +1,46 @@
-def JOB_NAME = env.JOB_NAME.split('/')[1]
-def TAG_NAME = ""
 pipeline {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
-    }
- 
+    agent any
+
     stages {
-        stage('Initialize') {
-          echo 'Hello World'
+        stage('Header_1') {
+            steps {
+                echo '1'
+            }
+        }
+        stage('Header_2') {
+            steps {
+                echo '2'
+            }
+        }
+        
+        stage('Parallel') { // add this
+            parallel {
+                stage('First Parallel Stage') {
+                    environment {
+                        TEST = 3
+                    }
+                    
+                    steps {
+                        echo "$TEST"
+                    }
+                }
+                
+                stage('Execute this together') { // add this
+                    stages {
+                        stage('Another_One') {
+                            steps {
+                                echo "4"
+                            }
+                        }
+                        
+                        stage('Yet Another_One') {
+                            steps {
+                                echo "5"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
