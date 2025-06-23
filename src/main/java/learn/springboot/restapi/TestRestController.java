@@ -27,6 +27,11 @@ public class TestRestController {
 
     private AtomicInteger userId = new AtomicInteger();
 
+    @GetMapping("/status")
+    public String status() {
+        return "OK";   
+    }
+
     @PostMapping("/createAndReturnOK")
     public String createAndReturnOK(@RequestBody User user) {
         usersMap.put(userId.incrementAndGet(), user);
